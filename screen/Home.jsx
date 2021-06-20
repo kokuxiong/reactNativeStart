@@ -11,9 +11,27 @@ export default function Home(props) {
   //
   return (
     <TopTab.Navigator>
-      <TopTab.Screen name="AllNews" component={AllNews} />
-      <TopTab.Screen name="InNews" component={InNews} />
-      <TopTab.Screen name="OutNews" component={OutNews} />
+      <TopTab.Screen
+        name="AllNews"
+        component={AllNews}
+        options={{
+          tabBarLabel: 'すべて',
+        }}
+      />
+      <TopTab.Screen
+        name="InNews"
+        component={InNews}
+        options={{
+          tabBarLabel: '社内',
+        }}
+      />
+      <TopTab.Screen
+        name="OutNews"
+        component={OutNews}
+        options={{
+          tabBarLabel: '社外',
+        }}
+      />
     </TopTab.Navigator>
   );
 }

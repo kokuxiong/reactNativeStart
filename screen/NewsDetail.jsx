@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import {
   Text,
-  View,
-  Button,
   StyleSheet,
-  Modal,
-  TextInput,
   SafeAreaView,
   StatusBar,
   Platform,
 } from 'react-native';
+import { Card } from 'react-native-elements';
 
-export default function NewDetail(props) {
+export default function NewsDetail(props) {
   //
   return (
     <SafeAreaView
@@ -19,17 +16,16 @@ export default function NewDetail(props) {
         ([styles.container],
         { marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0 })
       }>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
-      <Text>This is NewDetail page</Text>
+      <Card>
+        <Card.Title>dummy title (id:{props.route.params?.id})</Card.Title>
+        <Card.Divider />
+        <Card.Image
+          source={{ uri: 'https://picsum.photos/200/300' }}></Card.Image>
+        <Text>this is dummy content</Text>
+        <Text>this is dummy content</Text>
+        <Text>this is dummy content</Text>
+        <Text>this is dummy content</Text>
+      </Card>
     </SafeAreaView>
   );
 }

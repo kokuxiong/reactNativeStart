@@ -1,63 +1,103 @@
 import React, { useState } from 'react';
 import {
-  Text,
-  View,
-  Button,
   StyleSheet,
-  Modal,
-  TextInput,
   SafeAreaView,
   StatusBar,
   Platform,
+  View,
+  Button
 } from 'react-native';
+import { Input } from 'react-native-elements';
 
 export default function Login(props) {
-  //
+  const [inputMail, setInputMail] = useState('')
+  const [inputPassword, setInputPassword] = useState('')
+  const [mailErrorMsg, setMailErrorMsg] = useState('')
+  const [passwordErrorMsg, setPasswordErrorMsg] = useState('')
+  const [loginDisableCtrl, setLoginDisableCtrl] = useState(false)
+
+  const changeMail = (text) => {
+    setMailErrorMsg(text ? '' : '必須入力です');
+    setInputMail(text);
+    setLoginDisableCtrl(text && inputPassword)
+  }
+
+  const changePassword = (text) => {
+    setPasswordErrorMsg(text ? '' : '必須入力です');
+    setInputPassword(text)
+    setLoginDisableCtrl(text && inputMail)
+  }
+
+  const checkMail = () => {
+    setMailErrorMsg(inputMail ? '' : '必須入力です');
+  }
+
+  const checkPassword = () => {
+    setPasswordErrorMsg(inputPassword ? '' : '必須入力です');
+  }
+  
   return (
-    <SafeAreaView
-      style={
-        ([styles.container],
-        { marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0 })
+    <SafeAreaView style={
+      { flex:1,alignItems:'center',marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0 }
       }>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Text>This is Login page</Text>
-      <Button
-        title="ログイン"
-        onPress={() => props.navigation.navigate('HomeNavi')}
-      />
+      <View style={styles.input}>
+        <Input 
+          style={styles.textInput} 
+          placeholder="abc@temple.com" 
+          label="メールアドレス" 
+          errorStyle={{color:'red'}} 
+          errorMessage={mailErrorMsg}
+          onBlur={checkMail}
+          value={inputMail}
+          onChangeText={(text) => changeMail(text)}
+        />
+        <Input
+          style={styles.textInput}
+          placeholder="your password"
+          secureTextEntry={true}
+          label="パスワード"
+          errorStyle={{color:'red'}} 
+          errorMessage={passwordErrorMsg}
+          onBlur={checkPassword}
+          value={inputPassword}
+          onChangeText={(text) => changePassword(text)}
+        />
+      </View>
+      
+      <View style={styles.bottom}>
+        <Button
+          style={styles.loginButton}
+          title="ログイン"
+          onPress={() => props.navigation.navigate('HomeNavi')}
+          disabled={!loginDisableCtrl}
+        />
+      </View>
+      
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex:  1,
+    // flexDirection:  'row',
+    // justifyContent: 'space-between'
   },
-  textInput: {
-    borderWidth: 1,
-    borderColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
-    width: '80%',
+  input: {
+    flex:1,
+    paddingTop:50,
+    width:'80%'
   },
-  textTaskListTitle: {
-    textAlign: 'center',
-    fontWeight: '500',
-    fontSize: 20,
-    margin: 10,
-    borderBottomWidth: 5,
-    borderColor: 'gray',
+  bottom:{
+    flex:1,
+    justifyContent:'flex-end',
+    width:'100%',
+    height:36,
+    padding:5
   },
+  loginButton: {
+    position:'absolute',
+    justifyContent:'center',
+    alignItems:'center'
+  }
 });
