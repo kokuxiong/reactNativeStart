@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function AppNavi(props) {
   //
   return (
-    <Stack.Navigator initialRouteName="Welcome">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
         name="Welcome"
         component={Welcome}

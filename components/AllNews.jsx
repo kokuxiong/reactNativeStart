@@ -7,6 +7,9 @@ import {
   Platform,
 } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
+import { useSelector } from 'react-redux';
+
+
 
 //dummy data
 const list = [
@@ -88,6 +91,17 @@ const list = [
 ];
 
 export default function AllNews(props) {
+  // const items = useSelector((state) => state.item2.itemList);
+  const state = useSelector((state) => state);
+  // const items2 = useSelector((state) => state.itemList);
+  // const items3 = useSelector((state) => state.itemList.itemList);
+
+  console.log('test');
+  // console.log(items);
+  console.log(JSON.stringify(state));
+  // console.log(JSON.stringify(items2));
+  // console.log(JSON.stringify(items3));
+  console.log('test');
   //
   return (
     <SafeAreaView
