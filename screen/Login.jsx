@@ -42,11 +42,7 @@ export default function Login(props) {
   }
 
   const doLogin = () => {
-    dispatch(addItem(inputMail));
-    // props.navigation.navigate('HomeNavi');
-  };
-  const doLogin2 = () => {
-    dispatch(addItem(inputMail));
+    dispatch(addItem({ inputMail, inputPassword }));
     props.navigation.navigate('HomeNavi');
   };
   
@@ -86,12 +82,6 @@ export default function Login(props) {
           style={styles.loginButton}
           title="ログイン"
           onPress={doLogin}
-          disabled={!loginDisableCtrl}
-        />
-        <Button
-          style={styles.loginButton}
-          title="ログイン2"
-          onPress={doLogin2}
           disabled={!loginDisableCtrl}
         />
       </View>

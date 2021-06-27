@@ -4,6 +4,7 @@ import HomeNavi from '../navigator/HomeNavi';
 import Login from '../screen/Login';
 import Welcome from '../screen/Welcome';
 import NewsDetail from '../screen/NewsDetail';
+import Webview from '../screen/Webview';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -12,7 +13,7 @@ const Stack = createStackNavigator();
 export default function AppNavi(props) {
   //
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen
         name="Welcome"
         component={Welcome}
@@ -45,6 +46,22 @@ export default function AppNavi(props) {
         component={NewsDetail}
         options={({ route, navigation }) => ({
           title: '',
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ marginLeft: 10 }}
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <AntDesign name="left" size={24} color="black" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Webview"
+        component={Webview}
+        options={({ route, navigation }) => ({
+          title: '会社情報',
           headerLeft: () => (
             <TouchableOpacity
               style={{ marginLeft: 10 }}

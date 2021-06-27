@@ -11,7 +11,7 @@ const itemReducer = (state = initialState, action) => {
         ...state,
         itemList: state.itemList.concat({
           key: Math.random(),
-          name: action.data,
+          account: action.data,
         }),
       };
     case DELETE_ITEM:
