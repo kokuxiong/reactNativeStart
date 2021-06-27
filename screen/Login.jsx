@@ -8,6 +8,8 @@ import {
   Button
 } from 'react-native';
 import { Input } from 'react-native-elements';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../store/actions/item';
 
 export default function Login(props) {
   const [inputMail, setInputMail] = useState('')
@@ -15,6 +17,9 @@ export default function Login(props) {
   const [mailErrorMsg, setMailErrorMsg] = useState('')
   const [passwordErrorMsg, setPasswordErrorMsg] = useState('')
   const [loginDisableCtrl, setLoginDisableCtrl] = useState(false)
+
+
+  const dispatch = useDispatch();
 
   const changeMail = (text) => {
     setMailErrorMsg(text ? '' : '必須入力です');
@@ -35,17 +40,25 @@ export default function Login(props) {
   const checkPassword = () => {
     setPasswordErrorMsg(inputPassword ? '' : '必須入力です');
   }
+
+  const doLogin = () => {
+    dispatch(addItem({ inputMail, inputPassword }));
+    props.navigation.navigate('HomeNavi');
+  };
   
   return (
-    <SafeAreaView style={
-      { flex:1,alignItems:'center',marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0 }
-      }>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        marginTop: Platform.OS == 'android' ? StatusBar.currentHeight : 0,
+      }}>
       <View style={styles.input}>
-        <Input 
-          style={styles.textInput} 
-          placeholder="abc@temple.com" 
-          label="メールアドレス" 
-          errorStyle={{color:'red'}} 
+        <Input
+          style={styles.textInput}
+          placeholder="abc@temple.com"
+          label="メールアドレス"
+          errorStyle={{ color: 'red' }}
           errorMessage={mailErrorMsg}
           onBlur={checkMail}
           value={inputMail}
@@ -56,23 +69,22 @@ export default function Login(props) {
           placeholder="your password"
           secureTextEntry={true}
           label="パスワード"
-          errorStyle={{color:'red'}} 
+          errorStyle={{ color: 'red' }}
           errorMessage={passwordErrorMsg}
           onBlur={checkPassword}
           value={inputPassword}
           onChangeText={(text) => changePassword(text)}
         />
       </View>
-      
+
       <View style={styles.bottom}>
         <Button
           style={styles.loginButton}
           title="ログイン"
-          onPress={() => props.navigation.navigate('HomeNavi')}
+          onPress={doLogin}
           disabled={!loginDisableCtrl}
         />
       </View>
-      
     </SafeAreaView>
   );
 }
